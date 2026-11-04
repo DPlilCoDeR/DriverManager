@@ -50,9 +50,10 @@ public class PersonaDAOImpl implements PersonaDAO {
         PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, nif);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                persona = new Persona(rs.getString("NIF"), rs.getString("NOM"), rs.getInt("EDAT"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    persona = new Persona(rs.getString("NIF"), rs.getString("NOM"), rs.getInt("EDAT"));
+                }
             }
         } catch (SQLException e) {
             throw new PersonaException("No se a trobat la persona per NIF",e);
@@ -108,7 +109,7 @@ public class PersonaDAOImpl implements PersonaDAO {
      */
     @Override
     public boolean actualizar(Persona persona) {
-        String query = "UPDATE persones SET NOM = ?, EDAT = ? WHERE NIF = ?";
+        String query = "UPDATE persona SET NOM = ?, EDAT = ? WHERE NIF = ?";
 
         try (Connection con = this.conn.getConnexio();
         PreparedStatement ps = con.prepareStatement(query)) {
