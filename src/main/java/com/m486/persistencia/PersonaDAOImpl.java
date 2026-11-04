@@ -51,7 +51,9 @@ public class PersonaDAOImpl implements PersonaDAO {
 
             ps.setString(1, nif);
             ResultSet rs = ps.executeQuery();
-            persona = new Persona(rs.getString("NIF"), rs.getString("NOM"), rs.getInt("EDAT"));
+            if (rs.next()) {
+                persona = new Persona(rs.getString("NIF"), rs.getString("NOM"), rs.getInt("EDAT"));
+            }
         } catch (SQLException e) {
             throw new PersonaException("No se a trobat la persona per NIF",e);
         }
