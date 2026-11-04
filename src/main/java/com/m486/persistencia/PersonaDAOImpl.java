@@ -97,6 +97,17 @@ public class PersonaDAOImpl implements PersonaDAO {
      */
     @Override
     public boolean actualizar(Persona persona) {
-        return false;
+        String query = "UPDATE persones SET NOM = ?, EDAT = ? WHERE NIF = ?";
+
+        try (Connection con = this.conn.getConnexio();
+        PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, persona.getNombre());
+            ps.setInt(2, persona.getEdat());
+            ps.setString(3, persona.getNif());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new PersonaException("Error actualitzant la persona", e);
+        }
+
     }
 }
