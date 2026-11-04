@@ -8,4 +8,6 @@ public interface PersonaDAO {
     boolean afegir(Persona persona);
     Persona cercarPerNif(String nif);
     List<Persona> cercarTots();
+    boolean eliminar(String nif);
+    boolean actualizar(Persona persona);
 }

@@ -82,4 +82,21 @@ public class PersonaDAOImpl implements PersonaDAO {
 
 
     }
+
+    /**
+     * @param nif@return
+     */
+    @Override
+    public boolean eliminar(String nif) {
+        return false;
+    }
+
+    /**
+     * @param persona
+     * @return
+     */
+    @Override
+    public boolean actualizar(Persona persona) {
+        return false;
+    }
 }
