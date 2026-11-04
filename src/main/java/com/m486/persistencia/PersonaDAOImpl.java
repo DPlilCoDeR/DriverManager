@@ -84,16 +84,25 @@ public class PersonaDAOImpl implements PersonaDAO {
     }
 
     /**
-     * @param nif@return
+     * @param nif
+     * @return 1 || 0
      */
     @Override
     public boolean eliminar(String nif) {
-        return false;
+        String query = "DELETE FROM persona WHERE NIF = ?";
+
+        try (Connection con = this.conn.getConnexio();
+        PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, nif);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new PersonaException("Error eliminant la persona",e);
+        }
     }
 
     /**
      * @param persona
-     * @return
+     * @return 1||0
      */
     @Override
     public boolean actualizar(Persona persona) {
