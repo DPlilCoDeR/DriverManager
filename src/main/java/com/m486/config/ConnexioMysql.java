@@ -4,19 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Connexio {
+public class ConnexioMysql {
 
     private final String cadenaConnexio;
     private final String usuari;
     private final String contrasenya;
 
-    public Connexio() {
+    public ConnexioMysql() {
         cadenaConnexio = "jdbc:mysql://localhost:3306/persones";
         usuari = "app";
         contrasenya = "1234";
     }
 
-    public Connexio(String cadenaConnexio, String usuari, String contrasenya) {
+    public ConnexioMysql(String cadenaConnexio, String usuari, String contrasenya) {
         this.cadenaConnexio = cadenaConnexio;
         this.usuari = usuari;
         this.contrasenya = contrasenya;
